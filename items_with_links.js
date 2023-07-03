@@ -1,4 +1,4 @@
-[
+module.exports = [
   {
     href: "https://www.willys.se/produkt/Lingongrova-100168667_ST",
     alt: "Lingongrova",
@@ -52,6 +52,10 @@
     alt: "Bondkakor",
   },
   {
+    href: "https://www.willys.se/produkt/Norrlands-Guld-Lager-2-8procent-Folkol-Burk-101185947_ST",
+    alt: "Norrlands Guld Lager 2,8% Folköl Burk",
+  },
+  {
     href: "https://www.willys.se/produkt/Mezzo-Mellanrost-Bryggkaffe-101241278_ST",
     alt: "Mezzo Mellanrost Bryggkaffe",
   },
@@ -86,10 +90,6 @@
   {
     href: "https://www.willys.se/produkt/Ship-Full-Of-Ipa-Alkfri-Alkfri-Burk-101422287_ST",
     alt: "Ship Full Of Ipa Alkfri Alkfri Burk",
-  },
-  {
-    href: "https://www.willys.se/produkt/Norrlands-Guld-Lager-0-5procent-Alkfri-Burk-101236038_ST",
-    alt: "Norrlands Guld Lager 0,5% Alkfri Burk",
   },
   {
     href: "https://www.willys.se/produkt/Alkoholfri-Alkoholfri-0-5procent-Alkfri-Burk-101265025_ST",
