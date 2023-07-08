@@ -12,25 +12,33 @@ async function refreshCsrfToken() {
   csrfToken = await res.json();
 }
 
-function addItemToCart(item) {
-  return fetch("https://www.willys.se/axfood/rest/cart/addProducts", {
-    method: "POST",
-    headers: {
-      "X-Csrf-Token": csrfToken,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      products: [
-        {
-          hideDiscountToolTip: false,
-          noReplacementFlag: false,
-          pickUnit: item.unit === "st" ? "pieces" : "kilogram",
-          productCodePost: item.id,
-          qty: Number(item.amount),
-        },
-      ],
-    }),
-  });
+async function addItemToCart(item) {
+  const result = await fetch(
+    "https://www.willys.se/axfood/rest/cart/addProducts",
+    {
+      method: "POST",
+      headers: {
+        "X-Csrf-Token": csrfToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        products: [
+          {
+            hideDiscountToolTip: false,
+            noReplacementFlag: false,
+            pickUnit: item.unit === "st" ? "pieces" : "kilogram",
+            productCodePost: item.id,
+            qty: Number(item.amount),
+          },
+        ],
+      }),
+    }
+  );
+
+  if (!result.ok) {
+    console.log("Unable to add", item);
+    return item;
+  }
 }
 
 function sleep(ms) {
@@ -39,11 +47,16 @@ function sleep(ms) {
   });
 }
 
+console.log("refreshCsrfToken");
 await refreshCsrfToken();
 
-const data = JSON.parse(rawData).slice(0, 1);
+console.log("parsing data");
+const data = JSON.parse(rawData);
 
+let addedItems = 0;
+console.log("start adding items");
 for (const item of data) {
-  await addItemToCart(item);
   await sleep(250);
+  await addItemToCart(item);
+  console.log(`added ${++addedItems}/${data.length}`);
 }
